@@ -1,46 +1,43 @@
-# Getting Started with Create React App
+# Report Generator Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A React application for generating and editing presentation-style reports with markdown support.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- Generate different types of reports (CFO, CEO, COO)
+- Edit slides with markdown support
+- Live preview of markdown content
+- Export reports to PDF
 
-### `yarn start`
+## Prerequisites
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Node.js 20.x
+- Yarn
+- Docker (optional)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Environment Variables (only dev)
 
-### `yarn test`
+Create a `.env.development` file with:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+>REACT_APP_BACKEND_ENDPOINT=your_backend_url
 
-### `yarn build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Local Development
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Install dependencies:
+>yarn install
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Start development server:
+>yarn start
 
-### `yarn eject`
+Build for production:
+>yarn build
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Docker Deployment
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Build the image:
+>docker build -t report-generator-frontend --build-arg REACT_APP_BACKEND_ENDPOINT=your_backend_url .
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Run the container:
+>docker run -p 3000:80 report-generator-frontend
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
