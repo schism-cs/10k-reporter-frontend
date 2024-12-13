@@ -1,8 +1,8 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import { createContext, useContext, useState, ReactNode } from 'react';
 
 type ReportType = 'cfo' | 'ceo' | 'coo';
 
-interface SlideData {
+export interface SlideData {
   title: string;
   content?: string[];
   table_caption?: string;
@@ -11,7 +11,7 @@ interface SlideData {
   slide_type: string;
 }
 
-interface ReportContextType {
+interface ReportContext {
   isLoading: string | null;
   reportData: { slides: SlideData[] } | null;
   generateReport: (reportType: ReportType) => Promise<void>;
@@ -19,7 +19,7 @@ interface ReportContextType {
   updateSlide: (slideIndex: number, updatedSlide: SlideData) => void;
 }
 
-const ReportContext = createContext<ReportContextType | undefined>(undefined);
+const ReportContext = createContext<ReportContext | undefined>(undefined);
 
 export const ReportProvider = ({ children }: { children: ReactNode }) => {
   const [isLoading, setIsLoading] = useState<string | null>(null);
@@ -27,8 +27,9 @@ export const ReportProvider = ({ children }: { children: ReactNode }) => {
 
   const generateReport = async (reportType: ReportType) => {
     setIsLoading(reportType);
+
     try {
-      const response = await fetch('http://127.0.0.1:8000/generate_report', {
+      const response = await fetch(process.env.REACT_APP_BACKEND_ENDPOINT || "", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
