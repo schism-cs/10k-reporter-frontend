@@ -1,17 +1,17 @@
-FROM node:18-alpine as build
+FROM node:20-alpine AS build
 
 WORKDIR /app
 
 COPY package*.json ./
 
-RUN npm install
+RUN yarn install
 
 COPY . .
 
 ARG REACT_APP_BACKEND_ENDPOINT
 ENV REACT_APP_BACKEND_ENDPOINT=$REACT_APP_BACKEND_ENDPOINT
 
-RUN npm run build
+RUN yarn run build
 
 FROM nginx:alpine
 
