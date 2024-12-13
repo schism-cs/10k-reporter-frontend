@@ -1,6 +1,7 @@
 import React from 'react';
-import { Document, Page, Text, View, StyleSheet, PDFViewer } from '@react-pdf/renderer';
-import { SlideProps } from './Slide';
+import { Document, Page, Text, View, StyleSheet, PDFViewer,  } from '@react-pdf/renderer';
+import { SlideData } from '../context/ReportContext';
+import TableDocument from './TablePDF';
 
 const styles = StyleSheet.create({
   page: {
@@ -39,8 +40,10 @@ const styles = StyleSheet.create({
   },
 });
 
+  
+
 interface ReportPDFProps {
-  slides: SlideProps['slide'][];
+  slides: SlideData[];
 }
 
 export const ReportPDF: React.FC<ReportPDFProps> = ({ slides }) => {
@@ -70,7 +73,7 @@ export const ReportPDF: React.FC<ReportPDFProps> = ({ slides }) => {
                       {slide.table_caption}
                     </Text>
                   )}
-                  <Text>{slide.table}</Text>
+                  <TableDocument tableContent={slide.table}/>
                 </View>
               )}
 

@@ -1,29 +1,21 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import { SlideData } from '../context/ReportContext';
 
-export interface SlideProps {
-    slide: {
-        title: string;
-        content: string[];
-        table_caption?: string;
-        table?: string;
-        recommendations?: string[];
-        slide_type: string;
-    };
-}
 
-export const Slide: React.FC<SlideProps> = ({ slide }) => {
+
+export const Slide: React.FC<SlideData> = ({ title, slide_type, content, recommendations, table, table_caption }) => {
     return (
         <div className="slide">
             <h2 className="slide-title">
-                <ReactMarkdown >{slide.title}</ReactMarkdown>
+                <ReactMarkdown >{title}</ReactMarkdown>
             </h2>
 
             <div className="slide-content">
-                {slide.content && (
+                {content && (
                     <div className="slide-text-container">
-                        {slide.content.map((text, index) => (
+                        {content.map((text, index) => (
                             <div key={index} className="slide-text">
                                 <ReactMarkdown remarkPlugins={[remarkGfm]}>{text}</ReactMarkdown>
                             </div>
@@ -31,24 +23,24 @@ export const Slide: React.FC<SlideProps> = ({ slide }) => {
                     </div>
                 )}
 
-                {slide.table && (
+                {table && (
                     <div className="slide-table-container">
-                        {slide.table_caption && (
+                        {table_caption && (
                             <p className="table-caption">
-                                <ReactMarkdown remarkPlugins={[remarkGfm]}>{slide.table_caption}</ReactMarkdown>
+                                <ReactMarkdown remarkPlugins={[remarkGfm]}>{table_caption}</ReactMarkdown>
                             </p>
                         )}
                         <div className="table-wrapper">
-                            <ReactMarkdown remarkPlugins={[remarkGfm]}>{slide.table}</ReactMarkdown>
+                            <ReactMarkdown remarkPlugins={[remarkGfm]}>{table}</ReactMarkdown>
                         </div>
                     </div>
                 )}
 
-                {slide.recommendations && slide.recommendations.length > 0 && (
+                {recommendations && recommendations.length > 0 && (
                     <div className="recommendations">
                         <h3>Recommendations</h3>
                         <ul>
-                            {slide.recommendations.map((rec, index) => (
+                            {recommendations.map((rec, index) => (
                                 <li key={index}>
                                     <ReactMarkdown remarkPlugins={[remarkGfm]}>{rec}</ReactMarkdown>
                                 </li>

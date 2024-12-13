@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useReport } from '../context/ReportContext';
 import { EditableSlide } from './EditableSlide';
@@ -34,13 +34,13 @@ function ReportDisplay() {
     }
   };
 
-  /* if (showPDF) {
+  if (showPDF && reportData.slides) {
     return (
       <div style={{ width: '100vw', height: '100vh' }}>
         <ReportPDF slides={reportData.slides} />
       </div>
     );
-  } */
+  } 
 
   return (
     <div className="presentation-container">

@@ -1,16 +1,11 @@
 import React, { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import { SlideData } from '../context/ReportContext';
+import { Slide } from './Slide';
 
 interface EditableSlideProps {
-  slide: {
-    title: string;
-    content?: string[];
-    table_caption?: string;
-    table?: string;
-    recommendations?: string[];
-    slide_type: string;
-  };
+  slide: SlideData;
   onSave: (updatedSlide: EditableSlideProps['slide']) => void;
 }
 
@@ -52,6 +47,7 @@ export const EditableSlide: React.FC<EditableSlideProps> = ({ slide, onSave }) =
                   newContent[index] = e.target.value;
                   setEditedSlide({ ...editedSlide, content: newContent });
                 }}
+                rows={2}
               />
             ))}
           </div>
@@ -66,6 +62,7 @@ export const EditableSlide: React.FC<EditableSlideProps> = ({ slide, onSave }) =
               <textarea
                 value={editedSlide.table}
                 onChange={(e) => setEditedSlide({ ...editedSlide, table: e.target.value })}
+                rows={10}
               />
             </div>
           )}
@@ -96,48 +93,8 @@ export const EditableSlide: React.FC<EditableSlideProps> = ({ slide, onSave }) =
   }
 
   return (
-    <div className="slide">
-      <h2 className="slide-title">
-        <ReactMarkdown>{slide.title}</ReactMarkdown>
-      </h2>
-
-      <div className="slide-content">
-        {slide.content && (
-          <div className="slide-text-container">
-            {slide.content.map((text, index) => (
-              <div key={index} className="slide-text">
-                <ReactMarkdown remarkPlugins={[remarkGfm]}>{text}</ReactMarkdown>
-              </div>
-            ))}
-          </div>
-        )}
-
-        {slide.table && (
-          <div className="slide-table-container">
-            {slide.table_caption && (
-              <p className="table-caption">
-                <ReactMarkdown remarkPlugins={[remarkGfm]}>{slide.table_caption}</ReactMarkdown>
-              </p>
-            )}
-            <div className="table-wrapper">
-              <ReactMarkdown remarkPlugins={[remarkGfm]}>{slide.table}</ReactMarkdown>
-            </div>
-          </div>
-        )}
-
-        {slide.recommendations && slide.recommendations.length > 0 && (
-          <div className="recommendations">
-            <h3>Recommendations</h3>
-            <ul>
-              {slide.recommendations.map((rec, index) => (
-                <li key={index}>
-                  <ReactMarkdown remarkPlugins={[remarkGfm]}>{rec}</ReactMarkdown>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-      </div>
+    <div className="slide-container">
+      <Slide {...slide}/>
 
       <button className="edit-button" onClick={handleEdit}>
         ✏️ Edit Slide
