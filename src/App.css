@@ -438,7 +438,7 @@
 
 .edit-content textarea {
   width: 100%;
-  min-height: 100px;
+  min-height: 30px;
   margin-bottom: 15px;
   padding: 10px;
   border: 1px solid #ddd;
