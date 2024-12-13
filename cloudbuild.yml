@@ -1,0 +1,5 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'europe-west3-docker.pkg.dev/praxis-citron-444611-t7/cloud-run-source-deploy/10k-reporter-frontend/reporter-frontend', '.', '--build-arg', 'REACT_APP_BACKEND_ENDPOINT=https://reporter-backend-535785258273.europe-west3.run.app/generate_report']
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'europe-west3-docker.pkg.dev/praxis-citron-444611-t7/cloud-run-source-deploy/10k-reporter-frontend/reporter-frontend']

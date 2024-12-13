@@ -29,7 +29,7 @@ export const ReportProvider = ({ children }: { children: ReactNode }) => {
     setIsLoading(reportType);
 
     try {
-      const response = await fetch(process.env.REACT_APP_BACKEND_ENDPOINT || "", {
+      const response = await fetch(process.env.REACT_APP_BACKEND_ENDPOINT || "https://reporter-backend-535785258273.europe-west3.run.app/generate_report", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
